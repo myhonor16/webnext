@@ -1,0 +1,9 @@
+{
+  "name": "WebNext-Minimal",
+  "version": "3.0.3",
+  "private": true,
+  "dependencies": {
+    "html5shiv": "^3.7.2",
+    "normalize-css": "^3.0.2"
+  }
+}
