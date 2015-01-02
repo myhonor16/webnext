@@ -1,5 +1,5 @@
 // Self-executing function (http://markdalgleish.com/2011/03/self-executing-anonymous-functions/)
-(function(window){
+(function(window, document){
 	// Run on Execution
 	console.log('WebNext: Self-Executing Function Started');
 
@@ -12,4 +12,4 @@
 	var foo = 'bar';
 	window.foo = foo;
 
-})(window);
+})(window, document);

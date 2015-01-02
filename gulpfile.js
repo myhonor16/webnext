@@ -1,68 +1,63 @@
 var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	concat = require('gulp-concat'),
-	minifyCSS = require('gulp-minify-css'),
-	uglify = require('gulp-uglify');
-
-// var livereload = require('gulp-livereload');
+	gulpLoadPlugins = require('gulp-load-plugins'),
+	plg = gulpLoadPlugins({
+		rename: {
+			'gulp-minify-css': 'minifyCSS'
+		}
+	});
 
 // Build
-	gulp.task('css', function() {
+	gulp.task('styles::lib', function() {
 		// Libraries
-		gulp.src(['./bower_components/normalize-css/normalize.css'])
-			.pipe(plumber())
-			.pipe(concat('lib.css'))
-			.pipe(minifyCSS())
-			.pipe(gulp.dest('.'));
-			/*.pipe(livereload({
-				auto: false
-			}));*/
-		
-		// Your CSS
-		gulp.src(['./main.css'])
-			.pipe(plumber())
-			.pipe(concat('main.min.css'))
-			.pipe(minifyCSS())
-			.pipe(gulp.dest('.'));
-			/*.pipe(livereload({
-				auto: false
-			}));*/
+		return gulp.src(['./bower_components/normalize-css/normalize.css'])
+			.pipe(plg.plumber())
+			.pipe(plg.concat('lib.css'))
+			.pipe(plg.minifyCSS())
+			.pipe(gulp.dest('./styles/e/'));
+	});
 
-	gulp.task('js', function() {
+	gulp.task('styles::main', function() {
+		// Your CSS
+		return gulp.src(['./styles/main.css'])
+			.pipe(plg.plumber())
+			.pipe(plg.concat('main.css'))
+			.pipe(plg.minifyCSS())
+			.pipe(gulp.dest('./styles/e/'));
+	});
+
+	gulp.task('styles', ['styles::lib', 'styles::main']);
+
+	gulp.task('scripts::lib', function() {
 		// Libraries
-		/*gulp.src(['./bower_components/'])
-			.pipe(plumber())
-			.pipe(concat('lib.js'))
-			.pipe(uglify({
+		return gulp.src(['./bower_components/'])
+			.pipe(plg.plumber())
+			.pipe(plg.concat('lib.js'))
+			.pipe(plg.uglify({
 				mangle: false,
 				output: {
 					comments: true
 				}
 			}))
-			.pipe(gulp.dest('.'));*/
-			/*.pipe(livereload({
-				auto: false
-			}));*/
-
-		// Your JS
-		gulp.src(['./main.js'])
-			.pipe(plumber())
-			.pipe(concat('main.min.js'))
-			.pipe(uglify())
-			.pipe(gulp.dest('./'));
-			/*.pipe(livereload({
-				auto: false
-			}));*/
+			.pipe(gulp.dest('./scripts/e/'));
 	});
+
+	gulp.task('scripts::main', function() {
+		// Your JS
+		return gulp.src(['./main.js'])
+			.pipe(plg.plumber())
+			.pipe(plg.concat('main.js'))
+			.pipe(plg.uglify())
+			.pipe(gulp.dest('./scripts/e/'));
+	});
+
+	gulp.task('scripts', ['scripts::lib', 'scripts::main']);
 
 // Watch
 	gulp.task('watch', function() {
-		// livereload.listen();
-
-		gulp.watch('./*.css', ['css']);
-		gulp.watch('./*.js', ['js']);
+		gulp.watch('./*.css', ['styles']);
+		gulp.watch('./*.js', ['scripts']);
 	});
 
 // Default
-	gulp.task('default', ['css', 'js'], function() {
-	});
+	gulp.task('default', ['styles', 'scripts']);
+
