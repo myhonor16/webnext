@@ -43,7 +43,7 @@ var gulp = require('gulp'),
 
 	gulp.task('scripts::main', function() {
 		// Your JS
-		return gulp.src(['./main.js'])
+		return gulp.src(['./scripts/main.js'])
 			.pipe(plg.plumber())
 			.pipe(plg.concat('main.js'))
 			.pipe(plg.uglify())
