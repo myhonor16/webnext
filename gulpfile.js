@@ -7,7 +7,7 @@ var gulp = require('gulp'), // require gulp (duh)
 // Build
 	gulp.task('styles:lib', function() {
 		// Libraries
-		var source = ['./bower_components/normalize-css/normalize.css']; // put your CSS library files here
+		var source = ['./node_modules/normalize.css/normalize.css']; // put your CSS library files here
 		if (argv.production) { // run if --production flag is present
 			return gulp.src(source)
 				.pipe(plg.plumber())
@@ -31,6 +31,9 @@ var gulp = require('gulp'), // require gulp (duh)
 		if (argv.production) { // run if --production flag is present
 			return gulp.src(source)
 				.pipe(plg.plumber())
+				.pipe(plg.sass({
+					outputStyle: 'compressed'
+				}))
 				.pipe(plg.concat('main.css'))
 				.pipe(plg.minifyCss())
 				.pipe(gulp.dest('./styles/e/'));
@@ -38,6 +41,9 @@ var gulp = require('gulp'), // require gulp (duh)
 			return gulp.src(source)
 				.pipe(plg.plumber())
 				.pipe(plg.sourcemaps.init())
+				.pipe(plg.sass({
+					outputStyle: 'compressed'
+				}))
 				.pipe(plg.concat('main.css'))
 				.pipe(plg.sourcemaps.write())
 				.pipe(gulp.dest('./styles/e/'))
@@ -48,8 +54,8 @@ var gulp = require('gulp'), // require gulp (duh)
 	gulp.task('styles', ['styles:main']); // build styles without libraries
 
 	gulp.task('scripts:html5shiv', function() {
-		// move html5shiv from bower_components & rename
-		return gulp.src(['./bower_components/html5shiv/dist/html5shiv-printshiv.min.js'])
+		// move html5shiv from node_modules & rename
+		return gulp.src(['./node_modules/html5shiv/dist/html5shiv-printshiv.min.js'])
 			.pipe(plg.plumber())
 			.pipe(plg.concat('html5shiv.js'))
 			.pipe(gulp.dest('./scripts/e/'));
@@ -106,9 +112,9 @@ var gulp = require('gulp'), // require gulp (duh)
 
 // browserSync
 	gulp.task('serve', function() {
-		gulp.watch(['./**.html'], browserSync.reload);
-		gulp.watch(['./styles/**.css', '!./styles/e/**'], ['styles']);
-		gulp.watch(['./scripts/**.js', '!./scripts/e/**'], ['scripts']);
+		gulp.watch(['./**/*.html'], browserSync.reload);
+		gulp.watch(['./styles/**/*.css', './styles/**/*.scss', '!./styles/e/**'], ['styles']);
+		gulp.watch(['./scripts/**/*.js', '!./scripts/e/**'], ['scripts']);
 
 		return browserSync({
 			server: {
@@ -117,15 +123,14 @@ var gulp = require('gulp'), // require gulp (duh)
 			},
 			logPrefix: 'BrowserSync',
 			reloadDelay: 2000,
-			tunnel: true,
-			open: 'tunnel'
+			open: 'ui'
 		});
 	});
 
 // Watch
 	gulp.task('watch', function() {
-		gulp.watch(['./styles/**.css', '!./styles/e/**'], ['styles']);
-		gulp.watch(['./scripts/**.js', '!./scripts/e/**'], ['scripts']);
+		gulp.watch(['./styles/**/*.css', './styles/**/*.scss', '!./styles/e/**'], ['styles']);
+		gulp.watch(['./scripts/**/*.js', '!./scripts/e/**'], ['scripts']);
 	});
 
 // run all tasks minus watch & serve

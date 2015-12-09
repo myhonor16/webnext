@@ -3,22 +3,18 @@ WebNext
 
 [![License][license-img]][license-url] [![Version][version-img]][version-url] [![Dependency Status][gemnasium-img]][gemnasium-url] [![Open Issues][issues-img]][issues-url]
 
-WebNext is a lightweight template for creating websites or webapps with modern web technologies (HTML5, CSS3, ES6).
+WebNext is a lightweight template for creating websites or webapps with modern web technologies.
 
 ## Getting Started
 
 + Via Git
   + `git clone https://github.com/myhonor16/webnext.git`
-+ Via Yeoman (Comming soon)
-  + Install Yeoman & it's dependencies `npm install -g yo bower gulp`
-  + Install the generator `npm install -g generator-webnext`
-  + Run Yeoman in your Project Directory `yo webnext`
 
 ## Usage
 
-Pre-step: Make sure you have bower & gulp installed globally (`npm install -g bower gulp`)
+Pre-step: Make sure you have gulp installed globally (`npm install -g gulp`)
 
-1. Run `npm install` & `bower install` to install the default dependencies (not necessary if using yeoman generator)
+1. Run `npm install` to install the default dependencies
   + NPM
     + `gulp`
     + `gulp-babel`
@@ -26,15 +22,15 @@ Pre-step: Make sure you have bower & gulp installed globally (`npm install -g bo
     + `gulp-load-plugins`
     + `gulp-minify-css`
     + `gulp-plumber`
+    + `gulp-sass`
     + `gulp-sourcemaps`
     + `gulp-uglify`
     + `yargs`
     + `browser-sync`
-  + Bower
     + `html5shiv`
-    + `normalize-css`
-2. Install via NPM or Bower any other plugins or libraries you'd like
-3. Add said libraries to gulpfile.js (the gulpfile.js is well commented)
+    + `normalize.css`
+2. Install via NPM any other plugins or libraries you'd like
+3. Add said libraries to gulpfile.js
 4. Run `gulp init`
 5. From there you can run `gulp serve` to run start a server and watch for changes (via BrowserSync) or build on demand with just `gulp`
 6. Whenever you add any new libraries to gulpfile.js, run `gulp full`
