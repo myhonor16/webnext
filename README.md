@@ -64,7 +64,7 @@ Pre-step: Make sure you have gulp installed globally (`npm install -g gulp`)
 [version-img]: http://img.shields.io/badge/Version-1.0.0-brightgreen.svg?style=flat
 
 [gemnasium-url]: https://gemnasium.com/myhonor16/webnext
-[gemnasium-img]: http://img.shields.io/gemnasium/myhonor16/webnext.svg?style=flat
+[gemnasium-img]: https://gemnasium.com/myhonor16/webnext.svg
 
 [issues-url]: https://github.com/myhonor16/webnext/issues
 [issues-img]: http://img.shields.io/github/issues/myhonor16/webnext.svg?style=flat
